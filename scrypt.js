@@ -1,24 +1,43 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const entradaDeTexto = document.getElementById('entrada-de-texto');
-    const botaoGerar = document.getElementById('botao-palavrachave');
-    const resultadoDiv = document.getElementById('resultado-palavrachave');
+const botaoMostraPalavras = document.querySelector("#botao-palavrachave");
 
-    botaoGerar.addEventListener('click', () => {
-        const textoOriginal = entradaDeTexto.value;
+botaoMostraPalavras.addEventListener("click", mostraPalavrasChave);
 
-        if (textoOriginal.trim() === '') {
-            resultadoDiv.textContent = 'Por favor, insira algum texto para gerar as palavras-chave.';
-            return;
-        }
+function mostraPalavrasChave() {
+  const texto = document.querySelector("#entrada-de-texto").value;
 
-        // --- COLOCA A LÓGICA DO GERADOR AQUI ---
-        // 1. Processar o texto (remover stopwords, pontuação, etc.)
-        // 2. Contar a frequência das palavras.
-        // 3. Selecionar as mais relevantes.
-        
-        // Exemplo simples: apenas exibe o texto em maiúsculas por enquanto
-        const palavrasChaveFicticias = textoOriginal.toUpperCase().split(' ').slice(0, 5).join(' | ');
+  const campoResultado = document.querySelector("#resultado-palavrachave");
 
-        resultadoDiv.textContent = `Palavras-Chave Sugeridas: ${palavrasChaveFicticias}`;
-    });
-});
+  const palavrasChave = processaTexto(texto);
+
+  campoResultado.textContent = palavrasChave.join(", ");
+}
+
+function processaTexto(texto) {
+  let palavras = texto.split(/\P{L}+/u);
+
+  const frequencias = contaFrequencias(palavras);
+
+  let ordenadas = Object.keys(frequencias).sort(ordenaPalavra);
+
+  function ordenaPalavra(p1, p2) {
+    return frequencias[p2] - frequencias[p1];
+  }
+
+  return ordenadas.slice(0, 10);
+}
+
+function contaFrequencias(palavras) {
+  let frequencias = {};
+
+  for (let i of palavras) {
+    frequencias[i] = 0;
+
+    for (let j of palavras) {
+      if (i == j) {
+        frequencias[i]++;
+      }
+    }
+  }
+
+  return frequencias;
+}

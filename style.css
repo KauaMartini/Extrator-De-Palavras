@@ -1,0 +1,114 @@
+/* Definição de variáveis globais de cor e gradiente */
+:root {
+    --cor-destaque: #ED145B;
+    --cor-gradiente-preto: linear-gradient(113deg, #000 0%, #1E2021 44.96%, #1E2022 100%);
+    --cor-texto-padrao: #FFF;
+    --cor-fundo-input: #FFF;
+    --cor-placeholder: #828282;
+}
+
+/* Reset CSS e definição da fonte (Montserrat já foi importada no HTML) */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Montserrat', sans-serif;
+    box-sizing: border-box; /* Adicionado para facilitar o controle de padding/borda */
+}
+
+/* Estilo do corpo da página: fundo e centralização */
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 21px 18px 21px;
+    background: var(--cor-gradiente-preto);
+    height: 100vh;
+    flex-direction: column;
+    color: var(--cor-texto-padrao); /* Define cor padrão para o corpo */
+}
+
+
+/* Contêiner principal que agrupa os elementos */
+.container {
+    display: flex;
+    width: 65rem;
+    max-width: 90%; /* Garante que não ultrapasse a tela em dispositivos menores */
+    flex-direction: column;
+    align-items: center;
+    gap: 3rem;
+    overflow: hidden;
+}
+
+/* Estilo do Título H1 */
+h1 {
+    color: var(--cor-destaque);
+    text-align: center;
+    font-size: 2.8rem;
+    font-weight: 600;
+    text-transform: uppercase;
+}
+
+/* Campo de Entrada de Texto (Textarea) */
+#entrada-de-texto {
+    /* É um elemento de bloco, 'flex' é usado mais para alinhar o conteúdo interno se fosse um div */
+    display: flex; 
+    height: 12rem;
+    padding: 1.4rem 2.5rem 2.5rem 2.5rem;
+    align-items: flex-start;
+    gap: 0.625rem;
+    align-self: stretch; /* Ocupa a largura total do .container */
+    border-radius: 0.625rem;
+    background: var(--cor-fundo-input);
+    font-size: 2rem;
+    color: #333; /* Cor do texto digitado */
+    border: none; /* Garante que não tenha borda padrão */
+    resize: vertical; /* Permite redimensionar apenas verticalmente */
+}
+
+/* Estilo do Placeholder (texto de sugestão) */
+#entrada-de-texto::placeholder {
+    color: var(--cor-placeholder);
+    font-size: 2rem;
+    font-weight: 400;
+    line-height: normal;
+}
+
+/* Estilo do Botão */
+#botao-palavrachave {
+    display: flex;
+    padding: 1.25rem;
+    justify-content: center;
+    align-items: center;
+    gap: 0.625rem;
+    border-radius: 0.5rem;
+    border: none;
+    background: var(--cor-destaque);
+    color: #000;
+    font-size: 2.5rem;
+    font-weight: 500;
+    line-height: normal;
+    cursor: pointer; /* Adicionado para indicar que é clicável */
+    transition: background-color 0.3s; /* Efeito de transição */
+}
+
+/* Efeito ao passar o mouse sobre o botão */
+#botao-palavrachave:hover {
+    background-color: #f7558f; /* Uma variação um pouco mais clara do destaque */
+}
+
+/* Área de Resultado */
+#resultado-palavrachave {
+    display: flex;
+    border-radius: 0.625rem;
+    align-self: stretch;
+    color: var(--cor-destaque);
+    font-size: 2.5rem;
+    justify-content: center;
+    text-align: center; /* Centraliza o texto dentro do div */
+    margin-bottom: 2rem;
+    padding: 1rem; /* Adicionado um padding para o conteúdo não tocar a borda */
+    max-width: 100%;
+    max-height: 50vh;
+    overflow: auto; /* Adiciona barra de rolagem se o conteúdo exceder */
+    word-break: break-word; /* Garante que palavras muito longas quebrem a linha */
+}
